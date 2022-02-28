@@ -15,34 +15,41 @@ public class scheduler {
 		Scanner sc = new Scanner(System.in);
 		
 		while(true) {
-			System.out.println("$ ");
+			System.out.print("$ ");
 			String cmd = sc.next();
-			String kindofEvent = sc.next();
 			
 			if(cmd.equals("addevent")) {
+				String kindofEvent = sc.next();
+				System.out.println("cmd : " + cmd + " kindofEvent : " + kindofEvent);
+				
 				if(kindofEvent.equals("oneday")) {
+					System.out.println("add oneday event on list ");
+					
 					String Date;
 					String Title;
 					
-					System.out.println("when : ");
+					System.out.print("when : ");
 					Date = sc.next();
-					System.out.println("title : ");
+					System.out.print("title : ");
 					Title = sc.next();
 					
 					//addevent oneday when : user_input_date, title : user_input_title
 					oneEvents[oneNum] = new OneDayEvent(Title, Date);
 					oneNum++;
 					
+					
 				}else if(kindofEvent.equals("duration")) {
+					System.out.println("add duration event on list ");
+					
 					String beginDate;
 					String endDate;
 					String Title;
 					
-					System.out.println("begin date : ");
+					System.out.print("begin date : ");
 					beginDate = sc.next();
-					System.out.println("end date : ");
+					System.out.print("end date : ");
 					endDate = sc.next();
-					System.out.println("title : ");
+					System.out.print("title : ");
 					Title = sc.next();
 					
 					//addevent duration begin : user_input_date, title : user_input_title
@@ -51,18 +58,22 @@ public class scheduler {
 					durationNum++;
 					
 				}else if(kindofEvent.equals("deadline")) {
+					System.out.println("add deadline event on list ");
+					
 					String untilDate;
 					String Title;
 					
-					System.out.println("until : ");
+					System.out.print("until : ");
 					untilDate = sc.next();
-					System.out.println("title : ");
+					System.out.print("title : ");
 					Title = sc.next();
 					
 					//About Until Date. 
 					DeadlineEvents[deadlineNum] = new DeadlineEvent(Title, untilDate);
 					deadlineNum++;
 					
+				}else {
+					System.out.println("cannot find the kind of event..!");
 				}
 			}else if(cmd.equals("list")) {
 				allList();
@@ -71,9 +82,9 @@ public class scheduler {
 			}else if(cmd.equals("exit")) {
 				System.out.println("system exit.");
 				System.exit(0);
+			}else {
+				System.out.println("something wrong..! try again..!");
 			}
-			
-			
 		}
 		
 	}
@@ -84,15 +95,12 @@ public class scheduler {
 			System.out.println(oneEvents[i].title + " , " + oneEvents[i].when);
 		}
 		
-		for(int i = 0; i < durationNum; i++) {
-			System.out.println(durationEvents[i].title + " , " + durationEvents[i].begin + " ~ " + durationEvents[i].end);
+		for(int j = 0; j < durationNum; j++) {
+			System.out.println(durationEvents[j].title + " , " + durationEvents[j].begin + " ~ " + durationEvents[j].end);
 		}
 		
-		for(int i = 0; i < oneNum; i++) {
-			System.out.println(DeadlineEvents[i].title + " , " + " ~ " + DeadlineEvents[i].until);
+		for(int k = 0; k < deadlineNum; k++) {
+			System.out.println(DeadlineEvents[k].title + " , " + " ~ " + DeadlineEvents[k].until);
 		}
-		
 	}
-	
-
 }
