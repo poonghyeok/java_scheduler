@@ -10,12 +10,11 @@ interface myEvent{
 
 
 public class scheduler {
-	
-	
-	public static myEvent[] myEvents = new myEvent[100];
-	public static int eventNum = 0;
-	
-	public static void main(String[] args) {
+
+	public void mainProcess() {
+
+		myEvent[] myEvents = new myEvent[100];
+		int eventNum = 0;
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -41,7 +40,6 @@ public class scheduler {
 					//addevent oneday when : user_input_date, title : user_input_title
 					myEvents[eventNum] = new OneDayEvent(Title, Date);
 					eventNum++;
-					
 					
 				}else if(kindofEvent.equals("duration")) {
 					System.out.println("add duration event on list ");
@@ -98,7 +96,7 @@ public class scheduler {
 					System.out.println("cannot find the kind of event..!");
 				}
 			}else if(cmd.equals("list")) {
-				allList();
+				allList(eventNum, myEvents);
 			}else if(cmd.equals("show")) {
 				
 				ownDate showDate = new ownDate(sc.next());
@@ -117,13 +115,22 @@ public class scheduler {
 				System.out.println("something wrong..! try again..!");
 			}
 		}
+	
 	}
 	
-	public static void allList() {
+	public void allList(int eventNum, myEvent[] myEvents) {
 		//print OnedayEvents array elements.
 		for(int i = 0; i < eventNum; i++) {
 			System.out.println(myEvents[i].getTitle() + " , " + myEvents[i].getDate());
 		}
 	}
+	public static void main(String[] args) {
+
+		scheduler schedule = new scheduler();
+		schedule.mainProcess();
+		
+	}
+	
+
 
 }
