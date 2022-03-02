@@ -1,30 +1,32 @@
 package ch3_2;
 
-public class OneDayEvent {
+public class OneDayEvent implements myEvent {
+	
 	
 	public String title;
-	public String when;
-	
-	public String strYear;
-	public String strMonth;
-	public String strDay;
-	
-	public int year;
-	public int month;
-	public int day;
-	
+	public ownDate when;
 	
 	public OneDayEvent(String title, String date) {
-		this.title = title;
-		this.when = date;
-		strYear = date.split("/")[0];
-		strMonth = date.split("/")[1];
-		strDay = date.split("/")[2];
 		
-		year = Integer.parseInt(strYear);
-		month = Integer.parseInt(strMonth);
-		day = Integer.parseInt(strDay);
+		this.title = title;
+		this.when = new ownDate(date);
 		
 	}
 	
+	public String getTitle() {
+		return title;
+	}
+	
+	public String getDate() {
+		return when.dateTostring();
+	}
+	
+	public boolean amI(ownDate date) {
+		if(this.when.year == date.year && this.when.month == date.month && this.when.day == date.day){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 }

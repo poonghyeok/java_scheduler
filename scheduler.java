@@ -2,13 +2,18 @@ package ch3_2;
 
 import java.util.Scanner;
 
+interface myEvent{
+	String getTitle();
+	String getDate();
+	boolean amI(ownDate date);
+}
+
+
 public class scheduler {
-	public static OneDayEvent[] oneEvents = new OneDayEvent[100];
-	public static int oneNum = 0;
-	public static DurationEvent[] durationEvents = new DurationEvent[100];
-	public static int durationNum = 0;
-	public static DeadlineEvent[] DeadlineEvents = new DeadlineEvent[100];
-	public static int deadlineNum = 0;
+	
+	
+	public static myEvent[] myEvents = new myEvent[100];
+	public static int eventNum = 0;
 	
 	public static void main(String[] args) {
 
@@ -34,8 +39,8 @@ public class scheduler {
 					Title = sc.next();
 					
 					//addevent oneday when : user_input_date, title : user_input_title
-					oneEvents[oneNum] = new OneDayEvent(Title, Date);
-					oneNum++;
+					myEvents[eventNum] = new OneDayEvent(Title, Date);
+					eventNum++;
 					
 					
 				}else if(kindofEvent.equals("duration")) {
@@ -53,9 +58,8 @@ public class scheduler {
 					Title = sc.next();
 					
 					//addevent duration begin : user_input_date, title : user_input_title
-					durationEvents[durationNum] = new DurationEvent(Title, beginDate, endDate);
-					
-					durationNum++;
+					myEvents[eventNum] = new DurationEvent(Title, beginDate, endDate);
+					eventNum++;
 					
 				}else if(kindofEvent.equals("deadline")) {
 					System.out.println("add deadline event on list ");
@@ -69,8 +73,26 @@ public class scheduler {
 					Title = sc.next();
 					
 					//About Until Date. 
-					DeadlineEvents[deadlineNum] = new DeadlineEvent(Title, untilDate);
-					deadlineNum++;
+					myEvents[eventNum] = new DeadlineEvent(Title, untilDate);
+					eventNum++;
+					
+				}else if(kindofEvent.equals("periodic")) {
+					System.out.println("add periodic event on list ");
+					
+					String startDate;
+					String title;
+					String period;
+					
+					System.out.print("start Date : ");
+					startDate = sc.next();
+					System.out.println("period : ");
+					period = sc.next();
+					System.out.print("title : ");
+					title = sc.next();
+					
+					//About Until Date. 
+					myEvents[eventNum] = new PeriodicEvent(startDate, period, title);
+					eventNum++;
 					
 				}else {
 					System.out.println("cannot find the kind of event..!");
@@ -79,28 +101,29 @@ public class scheduler {
 				allList();
 			}else if(cmd.equals("show")) {
 				
+				ownDate showDate = new ownDate(sc.next());
+				
+				for(int i = 0; i < eventNum; i++) {
+					if(myEvents[i].amI(showDate)) {
+						System.out.println(myEvents[i].getTitle() + "," + myEvents[i].getDate());
+					}
+				}
+				
 			}else if(cmd.equals("exit")) {
 				System.out.println("system exit.");
+				sc.close();
 				System.exit(0);
 			}else {
 				System.out.println("something wrong..! try again..!");
 			}
 		}
-		
 	}
 	
 	public static void allList() {
 		//print OnedayEvents array elements.
-		for(int i = 0; i < oneNum; i++) {
-			System.out.println(oneEvents[i].title + " , " + oneEvents[i].when);
-		}
-		
-		for(int j = 0; j < durationNum; j++) {
-			System.out.println(durationEvents[j].title + " , " + durationEvents[j].begin + " ~ " + durationEvents[j].end);
-		}
-		
-		for(int k = 0; k < deadlineNum; k++) {
-			System.out.println(DeadlineEvents[k].title + " , " + " ~ " + DeadlineEvents[k].until);
+		for(int i = 0; i < eventNum; i++) {
+			System.out.println(myEvents[i].getTitle() + " , " + myEvents[i].getDate());
 		}
 	}
+
 }
