@@ -1,16 +1,14 @@
 package ch3_2;
 
-public class OneDayEvent implements myEvent {
-	
+public class OneDayEvent extends myEvent {
 	
 	public String title;
 	public ownDate when;
 	
 	public OneDayEvent(String title, String date) {
-		
+		super(date);
 		this.title = title;
 		this.when = new ownDate(date);
-		
 	}
 	
 	public String getTitle() {
@@ -28,5 +26,9 @@ public class OneDayEvent implements myEvent {
 			return false;
 		}
 	}
+	
+	
+	
+	
 
 }

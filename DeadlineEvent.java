@@ -1,12 +1,12 @@
 package ch3_2;
 
-public class DeadlineEvent implements myEvent {
+public class DeadlineEvent extends myEvent {
 	
 	public String title;
 	public ownDate until;
 	
 	public DeadlineEvent(String title, String date) {
-	
+		super(date);
 		this.title = title;
 		this.until = new ownDate(date);
 		

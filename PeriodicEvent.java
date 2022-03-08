@@ -1,11 +1,12 @@
 package ch3_2;
 
-public class PeriodicEvent implements myEvent{
+public class PeriodicEvent extends myEvent{
 	ownDate startDate;
 	String period;
 	String title;
 	
 	public PeriodicEvent(String Date, String period, String title) {
+		super(Date);
 		this.startDate = new ownDate(Date);
 		this.period = period;
 		this.title = title;

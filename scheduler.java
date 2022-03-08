@@ -2,13 +2,6 @@ package ch3_2;
 
 import java.util.Scanner;
 
-interface myEvent{
-	String getTitle();
-	String getDate();
-	boolean amI(ownDate date);
-}
-
-
 public class scheduler {
 
 	public void mainProcess() {
@@ -115,15 +108,31 @@ public class scheduler {
 				System.out.println("something wrong..! try again..!");
 			}
 		}
+
 	
 	}
 	
 	public void allList(int eventNum, myEvent[] myEvents) {
 		//print OnedayEvents array elements.
+		sorting(myEvents, eventNum);
+		
 		for(int i = 0; i < eventNum; i++) {
 			System.out.println(myEvents[i].getTitle() + " , " + myEvents[i].getDate());
 		}
 	}
+	
+	public void sorting(myEvent[] events, int size) {
+		for(int i = size -1; i >= 0; i--) {
+			for(int j = 0; j < i; j++) {
+				if(events[j].farFrom(events[j+1]) == 1) {
+					myEvent tmp = events[j+1];
+					events[j+1] = events[j];
+					events[j] = tmp;
+				}
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 
 		scheduler schedule = new scheduler();

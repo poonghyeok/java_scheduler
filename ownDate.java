@@ -15,4 +15,5 @@ public class ownDate {
 		return this.year + "/" + this.month + "/" + this.day;
 	}
 	
+	
 }

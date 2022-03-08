@@ -1,12 +1,13 @@
 package ch3_2;
 
-public class DurationEvent implements myEvent{
+public class DurationEvent extends myEvent{
 
 	public String title;
 	public ownDate begin;
 	public ownDate end;
 	
 	public DurationEvent(String title, String beginDate, String endDate) {
+		super(beginDate);
 		this.title = title;
 		this.begin = new ownDate(beginDate);
 		this.end = new ownDate(endDate);
